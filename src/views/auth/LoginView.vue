@@ -64,7 +64,7 @@ const handleLogin = async () => {
           <div>
             <h1 class="text-2xl font-bold tracking-tight text-white">Dobrodošli nazad</h1>
             <p class="text-xs text-slate-400 mt-1">
-              Unesite vaše pristupne podatke za ulazak na Asset Guard platformu.
+              Unesite vaše pristupne podatke za ulazak na Asset Tracker platformu.
             </p>
           </div>
         </div>
@@ -158,7 +158,7 @@ const handleLogin = async () => {
     >
       <img
         src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop"
-        alt="Asset Guard Abstract Background"
+        alt="Asset Tracker Abstract Background"
         class="absolute inset-0 h-full w-full object-cover animate-smooth-motion"
       />
       <div class="absolute inset-0 bg-slate-950/40 backdrop-blur-[1px]"></div>
