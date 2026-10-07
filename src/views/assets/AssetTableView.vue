@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
+import { useAssetBroadcast } from '@/composables/useAssetBroadcast'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useAssetStore } from '@/stores/assets'
@@ -121,6 +122,10 @@ const emit = defineEmits<{
 
 onMounted(() => {
   assetStore.fetchAssets()
+})
+
+useAssetBroadcast(() => {
+  void assetStore.fetchAssets(assetStore.pagination.currentPage)
 })
 
 // Debounce pretrage

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useAssetStore } from '@/stores/assets'
@@ -18,6 +18,7 @@ import {
   Clock,
 } from 'lucide-vue-next'
 import type { HardwareDetail } from '@/types'
+import { useAssetBroadcast } from '@/composables/useAssetBroadcast'
 
 // Modali za akcije
 import AssetCheckoutModal from '@/components/assets/AssetCheckoutModal.vue'
@@ -37,6 +38,16 @@ onMounted(async () => {
   if (assetId.value) {
     await assetStore.fetchAssetById(assetId.value)
   }
+})
+
+useAssetBroadcast((event) => {
+  if (event.asset_id === assetId.value) {
+    void assetStore.fetchAssetById(assetId.value).catch(() => undefined)
+  }
+})
+
+watch(assetId, (id) => {
+  if (id) void assetStore.fetchAssetById(id)
 })
 
 const getStatusBadgeClass = (status: string) => {

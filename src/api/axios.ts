@@ -10,6 +10,19 @@ export const api = axios.create({
   },
 })
 
+// Broadcasting auth is a web route, not an /api route, and uses the same
+// Sanctum session and XSRF cookie as the rest of the application.
+export const broadcastApi = axios.create({
+  baseURL: '/',
+  withCredentials: true,
+  withXSRFToken: true,
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest',
+  },
+})
+
 // Uvek ucitavamo CSRF pre osetljivih zahteva
 export const getCsrfToken = async (): Promise<void> => {
   await axios.get('/sanctum/csrf-cookie', { withCredentials: true })
